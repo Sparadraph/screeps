@@ -55,7 +55,7 @@ var roleFiller = {
                 }
             }
         }
-    }
+	}
 };
 
 module.exports = roleFiller;

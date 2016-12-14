@@ -21,22 +21,28 @@ module.exports.loop = function () {
 
     var tower = Game.getObjectById('583d7e064ec4782b74195a75');
     var tower2 = Game.getObjectById('583d6a7e7bba33137857917e');
+    var tower7 = Game.getObjectById('584a012065177730623157db');
     var closestHostile = tower2.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
     if(closestHostile) {
         tower.attack(closestHostile);
         tower2.attack(closestHostile);
+        tower7.attack(closestHostile);
     }
 
     var tower3 = Game.getObjectById('583ffd6e91bfac4467250661');
+    var tower4 = Game.getObjectById('584625e28fa93e5c7f48d616');
     closestHostile = tower3.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
     if(closestHostile) {
         tower3.attack(closestHostile);
+        tower4.attack(closestHostile);
     }
 
     var tower5 = Game.getObjectById('584785f3aaf0a9985bbb260c');
+    var tower6 = Game.getObjectById('584b393601b86e9546684c43');
     closestHostile = tower5.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
     if(closestHostile) {
         tower5.attack(closestHostile);
+        tower6.attack(closestHostile);
     }
 
 
