@@ -1,9 +1,35 @@
 var walk = require('walk');
 var fs = require('fs');
 
+var args = {}
+process.argv.forEach(function(val, index, array) {
+    if(val.indexOf('=') >= 0) {
+        args[val.split('=')[0]] = val.split('=')[1];
+    }
+})
+
+req_args = ['p', 'l'];
+default_args = {
+    b: 'tmp',
+};
+
+for(var i in req_args) {
+    if(args[req_args[i]] == undefined) {
+        console.log('Required arg ' + req_args[i] + ' missing.');
+    }
+}
+
+
+for(var i in default_args) {
+    if(args[i] == undefined) {
+        args[i] = default_args[i];
+    }
+}
+
+
+
 var files = {};
 var walker = walk.walk('/home/odoo/scripts', { followLinks: false });
-
 
 walker.on('file', function(root, stat, next) {
     if(stat.name.slice(-3) == '.js')
@@ -14,10 +40,10 @@ walker.on('file', function(root, stat, next) {
 walker.on('end', function() {
     var https = require('https');
 
-    var email = '<login>',
-        password = '<password>',
+    var email = args['l'],
+        password = args['p'],
         data = {
-            branch: 'tmp',
+            branch: args['b'],
             modules: files,
         };
 
