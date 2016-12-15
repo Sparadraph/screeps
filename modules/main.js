@@ -16,9 +16,11 @@ var flagLink = require('flag.link');
 
 var tools = require('tools');
 var roomManager = require('room.manager');
+var spawnManager = require('spawn.manager');
 
 module.exports.loop = function () {
     tools.clean_mem();
+    spawnManager.init();
 
     /* TMP LEGACY */
     _.filter(Game.creeps, (creep) => creep.memory.role == 'filler').forEach(function(creep) {creep.memory.role = 'filler'});
@@ -73,6 +75,6 @@ module.exports.loop = function () {
 
 
 
-
+    spawnManager.produceCreep(true);
     tools.display_cpu();
 }
