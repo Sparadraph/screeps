@@ -20,17 +20,14 @@ var roomManager = require('room.manager');
 module.exports.loop = function () {
     tools.clean_mem();
 
+    /* TMP LEGACY */
+    _.filter(Game.creeps, (creep) => creep.memory.role == 'filler').forEach(function(creep) {creep.memory.role = 'filler'});
+    _.filter(Game.creeps, (creep) => creep.memory.role == 'filler2').forEach(function(creep) {creep.memory.role = 'filler'});
+    _.filter(Game.creeps, (creep) => creep.memory.role == 'filler3').forEach(function(creep) {creep.memory.role = 'filler'});
+    /* TMP LEGACY */
+
     roomManager.manageRooms();
 
-    for(var name in Game.creeps) {
-        var creep = Game.creeps[name];
-        if(creep.memory.role == 'filler' || creep.memory.role == 'filler2' || creep.memory.role == 'filler3') {
-            roleFiller.run(creep);
-        }
-        if(creep.memory.role == 'reserver') {
-            roleReserver.run(creep);
-        }
-    }
 
     /*
     9-9 => miner
@@ -74,19 +71,8 @@ module.exports.loop = function () {
         }
     }
 
-    var fillers = _.filter(Game.creeps, (creep) => creep.memory.role == 'filler');
-    var fillers2 = _.filter(Game.creeps, (creep) => creep.memory.role == 'filler2');
-    var fillers3 = _.filter(Game.creeps, (creep) => creep.memory.role == 'filler3');
 
-    if(fillers.length < 2) {
-        var newName = Game.spawns['Spawn4'].createCreep([CARRY, MOVE, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE], undefined, {role: 'filler', x: 20, y: 18});
-    }
-    if(fillers2.length < 2) {
-        var newName = Game.spawns['Spawn2'].createCreep([CARRY, MOVE, CARRY, MOVE, CARRY, MOVE], undefined, {role: 'filler2', x: 23, y: 22});
-    }
-    if(fillers3.length < 2) {
-        var newName = Game.spawns['Spawn3'].createCreep([CARRY, MOVE, CARRY, MOVE, CARRY, MOVE], undefined, {role: 'filler3', x: 46, y: 19});
-    }
+
 
     tools.display_cpu();
 }

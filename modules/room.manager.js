@@ -1,3 +1,6 @@
+var roleFiller = require('role.filler');
+var tools = require('tools');
+
 var roomManager = {
     getSpawnRoomNames: function() {
         var roomNames = [];
@@ -25,10 +28,46 @@ var roomManager = {
         }
     },
 
+    manageFillers: function(room) {
+        if(!room.memory.max_filler) room.memory.max_filler = 2;
+        if(!room.memory.body_filler) room.memory.body_filler = [CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+        if(!room.memory.x_filler || !room.memory.y_filler) {
+            var pull_structure = tools.getPullStructure(room);
+            if(pull_structure) {
+                room.memory.x_filler = pull_structure.pos.x;
+                room.memory.y_filler = pull_structure.pos.y;
+            } else {
+                return -1
+            }
+        }
+
+        var fillers = room.find(FIND_MY_CREEPS, {
+            filter: function(creep) {
+                return creep.memory.role == 'filler';
+            }
+        })
+
+        fillers.forEach(function(creep) {
+            roleFiller.run(creep);
+        })
+
+        if(fillers.length < room.memory.max_filler) {
+            var spawns = room.find(FIND_MY_STRUCTURES, {
+                filter: function(s) {
+                    return s.structureType == 'spawn';
+                }
+            })
+            if(spawns.length > 0) {
+                spawns[0].createCreep(room.memory.body_filler, undefined, {role: 'filler', x: room.memory.x_filler, y: room.memory.y_filler});
+            }
+        }
+    }
+
     manageRooms: function() {
         this.getSpawnRoomNames().forEach(function(roomName) {
             var room = Game.rooms[roomName];
             this.manageTowers(room);
+            this.manageFillers(room);
         })
     },
 

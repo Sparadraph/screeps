@@ -40,15 +40,33 @@ var tools = {
 
             var path = Room.deserializePath(creep.memory.path);
             creep.moveByPath(path);
-
-        /*
-            var route = Game.map.findRoute(creep.room, room_name);
-            if(route.length > 0) {
-                var exit = creep.pos.findClosestByRange(route[0].exit);
-                creep.moveTo(exit);
-            }*/
         }
     },
+
+    getPullStructure: function(room) {
+        var storages = room.find(FIND_MY_STRUCTURES, {
+            filter: function(s) {
+                return s.structureType == "storage";
+            }
+        })
+        if(storages) return storages[0];
+
+        var containers = room.find(FIND_MY_STRUCTURES, {
+            filters: function(s) {
+                return s.structureType == "container";
+            }
+        })
+        if(containers) return container[0];
+
+        var flags = room.find(FIND_FLAGS, {
+            filters: function(flag) {
+                return flag.color == 6 && flag.secondaryColor == 6;
+            }
+        })
+        if(flags) return flags[0];
+
+        return null;
+    }
 
     clean_mem: function() {
         for(var name in Memory.creeps) {
