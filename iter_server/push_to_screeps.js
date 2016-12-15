@@ -29,7 +29,7 @@ for(var i in default_args) {
 
 
 var files = {};
-var walker = walk.walk('/home/odoo/scripts', { followLinks: false });
+var walker = walk.walk('/home/odoo/scripts/modules', { followLinks: false });
 
 walker.on('file', function(root, stat, next) {
     if(stat.name.slice(-3) == '.js')
