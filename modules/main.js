@@ -15,45 +15,15 @@ var flagSoldier = require('flag.soldier');
 var flagLink = require('flag.link');
 
 var tools = require('tools');
+var roomManager = require('room.manager');
 
 module.exports.loop = function () {
     tools.clean_mem();
 
-    var tower = Game.getObjectById('583d7e064ec4782b74195a75');
-    var tower2 = Game.getObjectById('583d6a7e7bba33137857917e');
-    var tower7 = Game.getObjectById('584a012065177730623157db');
-    var closestHostile = tower2.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-    if(closestHostile) {
-        tower.attack(closestHostile);
-        tower2.attack(closestHostile);
-        tower7.attack(closestHostile);
-    }
-
-    var tower3 = Game.getObjectById('583ffd6e91bfac4467250661');
-    var tower4 = Game.getObjectById('584625e28fa93e5c7f48d616');
-    closestHostile = tower3.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-    if(closestHostile) {
-        tower3.attack(closestHostile);
-        tower4.attack(closestHostile);
-    }
-
-    var tower5 = Game.getObjectById('584785f3aaf0a9985bbb260c');
-    var tower6 = Game.getObjectById('584b393601b86e9546684c43');
-    closestHostile = tower5.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
-    if(closestHostile) {
-        tower5.attack(closestHostile);
-        tower6.attack(closestHostile);
-    }
-
+    roomManager.manageRooms();
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
-/*        if(creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
-        }
-        if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        }*/
         if(creep.memory.role == 'filler' || creep.memory.role == 'filler2' || creep.memory.role == 'filler3') {
             roleFiller.run(creep);
         }
@@ -104,13 +74,10 @@ module.exports.loop = function () {
         }
     }
 
-        /*var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');*/
     var fillers = _.filter(Game.creeps, (creep) => creep.memory.role == 'filler');
     var fillers2 = _.filter(Game.creeps, (creep) => creep.memory.role == 'filler2');
     var fillers3 = _.filter(Game.creeps, (creep) => creep.memory.role == 'filler3');
-/*  if(harvesters.length < 1) {
-        var newName = Game.spawns['Spawn1'].createCreep([WORK,CARRY,MOVE], undefined, {role: 'harvester'});
-    }*/
+
     if(fillers.length < 2) {
         var newName = Game.spawns['Spawn4'].createCreep([CARRY, MOVE, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE], undefined, {role: 'filler', x: 20, y: 18});
     }
@@ -120,11 +87,6 @@ module.exports.loop = function () {
     if(fillers3.length < 2) {
         var newName = Game.spawns['Spawn3'].createCreep([CARRY, MOVE, CARRY, MOVE, CARRY, MOVE], undefined, {role: 'filler3', x: 46, y: 19});
     }
-/*
-    roleTest = require('role.test');
-    var tests = _.filter(Game.creeps, (creep) => creep.memory.role == 'test');
-    for(var i in tests) {
-        roleTest.run(tests[i]);
-    }*/
+
     tools.display_cpu();
 }
