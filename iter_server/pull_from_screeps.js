@@ -44,7 +44,7 @@ function getData(login, password, branch){
             var modules = JSON.parse(str).modules;
             for(var file in modules) {
                 console.log(file);
-                fs.writeFile("/home/odoo/scripts/modules" + file + ".js", modules[file], function(err) {
+                fs.writeFile("/home/odoo/scripts/modules/" + file + ".js", modules[file], function(err) {
                     if(err) {
                         return console.log(err);
                     }
