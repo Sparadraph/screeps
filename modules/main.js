@@ -21,13 +21,6 @@ var spawnManager = require('spawn.manager');
 module.exports.loop = function () {
     tools.clean_mem();
     spawnManager.init();
-
-    /* TMP LEGACY */
-    _.filter(Game.creeps, (creep) => creep.memory.role == 'filler').forEach(function(creep) {creep.memory.role = 'filler'});
-    _.filter(Game.creeps, (creep) => creep.memory.role == 'filler2').forEach(function(creep) {creep.memory.role = 'filler'});
-    _.filter(Game.creeps, (creep) => creep.memory.role == 'filler3').forEach(function(creep) {creep.memory.role = 'filler'});
-    /* TMP LEGACY */
-
     roomManager.manageRooms();
 
 

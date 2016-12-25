@@ -20,7 +20,7 @@ var roomManager = {
         });
         if(towers.length == 0) return 1;
 
-        var hostile = tower[0].pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        var hostile = towers[0].pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if(hostile) {
             towers.forEach(function(tower) {
                 tower.attack(hostile);
