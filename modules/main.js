@@ -21,7 +21,7 @@ var managerSpawn = require('manager.spawn');
 module.exports.loop = function () {
     tools.clean_mem();
     managerSpawn.init();
-    managermanager.roomooms();
+    managerRoom.manageRooms();
 
 
     /*
