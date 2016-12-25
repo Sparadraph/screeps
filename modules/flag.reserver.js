@@ -1,4 +1,5 @@
 var roleReserver = require('role.reserver');
+var spawnManager = require('spawn.manager');
 
 var flagReserver = {
     manage: function(flag) {
@@ -23,10 +24,12 @@ var flagReserver = {
                 create = false;
             }
             if(create) {
-                tname = flag.memory.index%10 + '_' + cname;
-                if(Game.spawns[flag.memory.spawn_name].createCreep(flag.memory.body, tname) == tname) {
-                    flag.memory.index += 1;
-                }
+                var tname = flag.memory.index%10 + '_' + cname;
+                // if(Game.spawns[flag.memory.spawn_name].createCreep(flag.memory.body, tname) == tname) {
+                //     flag.memory.index += 1;
+                // }
+                var spawn = Game.spawns[flag.memory.spawn_name];
+                spawnManager.addCreep(flag, 24, spawn, flag.memory.body, tname, {});
             }
         }
         for(var i in creeps) {

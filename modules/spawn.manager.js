@@ -7,8 +7,8 @@ var spawnManager = {
         Memory.spawnManager.refuse = [];
     },
 
-    addCreep: function(sequence, spawn, body, name, mem) {
-        var data = {sequence: sequence, body: body, name: name, mem: mem}
+    addCreep: function(flag, sequence, spawn, body, name, mem) {
+        var data = {flag: flag, sequence: sequence, body: body, name: name, mem: mem}
         if(!Memory.spawnManager.accept.spawn) {
             Memory.spawnManager.accept.spawn = data;
         } else if(Memory.spawnManager.accept.spawn.sequence > sequence) {
@@ -22,7 +22,12 @@ var spawnManager = {
     produceCreep: function(verbose) {
         _.forOwn(Memory.spawnManager.accept, function(spawn) {
             var data = Memory.spawnManager.accept.spawn;
-            spawn.createCreep(data.body, data.name, data.mem);
+            if(spawn.createCreep(data.body, data.name, data.mem) == data.name) {
+                data.flag.memory.index += 1;
+                if(data.flag.memory.to_replace) {
+                    data.flag.memory.to_replace = Math.max(0, data.flag.memory.to_replace - 1);
+                }
+            };
         })
         if(verbose) {
             _.forOwn(Memory.spawnManager.accept, function(spawn) {
