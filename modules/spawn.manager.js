@@ -8,13 +8,14 @@ var spawnManager = {
     },
 
     addCreep: function(sequence, spawn, body, name, mem) {
+        var data = {sequence: sequence, body: body, name: name, mem: mem}
         if(!Memory.spawnManager.accept.spawn) {
-            Memory.spawnManager.accept.spawn = {sequence: sequence, body: body, name: name, mem: mem};
+            Memory.spawnManager.accept.spawn = data;
         } else if(Memory.spawnManager.accept.spawn.sequence > sequence) {
             Memory.spawnManager.refuse.push(Memory.spawnManager.accept.spawn);
-            Memory.spawnManager.accept.spawn = {sequence: sequence, body: body, name: name, mem: mem};
+            Memory.spawnManager.accept.spawn = data;
         } else {
-            Memory.spawnManager.refuse.push({: , sequence: sequence, body: body, name: name, mem: mem});
+            Memory.spawnManager.refuse.push(data);
         }
     }
 
