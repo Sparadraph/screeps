@@ -57,10 +57,6 @@ var flagMiner = {
                     'source_id': sources[0].id,
                 }
             var tname = flag.memory.index%10 + '_' + cname;
-            // if(Game.spawns[flag.memory.spawn_name].createCreep(flag.memory.body, tname, mem) == tname) {
-            //     flag.memory.to_replace = Math.max(0, flag.memory.to_replace - 1);
-            //     flag.memory.index += 1;
-            // }
             var spawn = Game.spawns[flag.memory.spawn_name];
             managerSpawn.addCreep(flag, 4, spawn, flag.memory.body, tname, mem);
         }

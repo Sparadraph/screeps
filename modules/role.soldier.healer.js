@@ -12,8 +12,6 @@ var roleSoldierHealer = {
             if(closestFriend) {
                 if(creep.heal(closestFriend) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(closestFriend);
-                } else {
-                    tools.move(creep, fpos.x, fpos.y, fpos.roomName);
                 }
             } else {
                 tools.move(creep, fpos.x, fpos.y, fpos.roomName);
