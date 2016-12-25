@@ -1,7 +1,9 @@
 var roleFiller = require('role.filler');
 var tools = require('tools');
+var managerMarket = require('manager.market');
 
-var roomManager = {
+
+var managerRoom = {
     getSpawnRoomNames: function() {
         var roomNames = [];
         _.forOwn(Game.spawns, function(spawn) {
@@ -35,7 +37,7 @@ var roomManager = {
             filter: function(s) {
                 return  s.structureType != 'wall' && (
                         (s.structureType == 'rampart' && s.hits < 10000) ||
-                        s.hits < s.hitsMax
+                        (s.structureType != 'rampart' && s.hits < s.hitsMax)
                     );
             },
         }).forEach(function(s) {
@@ -92,9 +94,13 @@ var roomManager = {
                 this.manageRepairs(room);
             }
             this.manageFillers(room);
+
+            if(Game.time%10 == 0) {
+                managerMarket.manage(room);
+            }
         })
     },
 
 };
 
-module.exports = roomManager;
+module.exports = managerRoom;

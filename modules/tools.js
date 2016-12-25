@@ -102,7 +102,7 @@ var tools = {
         var total1 = _.takeRight(Memory.cpu_stat.hold, hl1).reduce(function(a, b) { return a + b; }, 0) / hl1;
         var total2 = _.takeRight(Memory.cpu_stat.hold, hl2).reduce(function(a, b) { return a + b; }, 0) / hl2;
         var total3 = _.takeRight(Memory.cpu_stat.hold, hl3).reduce(function(a, b) { return a + b; }, 0) / hl3;
-        console.log(total1.toFixed(3) + ' - ' + total2.toFixed(3) + ' - ' + total3.toFixed(3) + ' [ ' + cpu_used.toFixed(3) + ' ] ' + Game.cpu.bucket.toFixed(0));
+        console.log(Game.time + ' || ' + total1.toFixed(3) + ' - ' + total2.toFixed(3) + ' - ' + total3.toFixed(3) + ' [ ' + cpu_used.toFixed(3) + ' ] ' + Game.cpu.bucket.toFixed(0));
     },
 
 }

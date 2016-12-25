@@ -15,13 +15,13 @@ var flagSoldier = require('flag.soldier');
 var flagLink = require('flag.link');
 
 var tools = require('tools');
-var roomManager = require('room.manager');
-var spawnManager = require('spawn.manager');
+var managerRoom = require('manager.room');
+var managerSpawn = require('manager.spawn');
 
 module.exports.loop = function () {
     tools.clean_mem();
-    spawnManager.init();
-    roomManager.manageRooms();
+    managerSpawn.init();
+    managermanager.roomooms();
 
 
     /*
@@ -68,6 +68,6 @@ module.exports.loop = function () {
 
 
 
-    spawnManager.produceCreep(true);
+    managerSpawn.produceCreep(false);
     tools.display_cpu();
 }

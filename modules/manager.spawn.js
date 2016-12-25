@@ -1,27 +1,29 @@
 var tools = require('tools');
 
-var spawnManager = {
+var managerSpawn = {
     init: function() {
-        Memory.spawnManager = {};
-        Memory.spawnManager.accept = {};
-        Memory.spawnManager.refuse = [];
+        Memory.managerSpawn = {};
+        Memory.managerSpawn.accept = {};
+        Memory.managerSpawn.refuse = [];
     },
 
     addCreep: function(flag, sequence, spawn, body, name, mem) {
         var data = {flag: flag, sequence: sequence, spawn: spawn, body: body, name: name, mem: mem}
-        if(!Memory.spawnManager.accept[spawn.name]) {
-            Memory.spawnManager.accept[spawn.name] = data;
-        } else if(Memory.spawnManager.accept[spawn.name].sequence > sequence) {
-            Memory.spawnManager.refuse.push(Memory.spawnManager.accept[spawn.name]);
-            Memory.spawnManager.accept[spawn.name] = data;
+        if(!Memory.managerSpawn.accept[spawn.name]) {
+            Memory.managerSpawn.accept[spawn.name] = data;
+        } else if(Memory.managerSpawn.accept[spawn.name].sequence > sequence) {
+            Memory.managerSpawn.refuse.push(Memory.managerSpawn.accept[spawn.name]);
+            Memory.managerSpawn.accept[spawn.name] = data;
         } else {
-            Memory.spawnManager.refuse.push(data);
+            Memory.managerSpawn.refuse.push(data);
         }
     },
 
     produceCreep: function(verbose) {
-        _.forOwn(Memory.spawnManager.accept, function(data) {
-            console.log("(" + data.sequence + ") TMP Spawning " + data.name + " from " + data.spawn.name);
+        _.forOwn(Memory.managerSpawn.accept, function(data) {
+            if(verbose) {
+                console.log("(" + data.sequence + ") TMP Spawning " + data.name + " from " + data.spawn.name);
+            }
             if(data.spawn.createCreep(data.body, data.name, data.mem) == data.name) {
                 data.flag.memory.index += 1;
                 if(data.flag.memory.to_replace) {
@@ -33,11 +35,11 @@ var spawnManager = {
             };
         })
         if(verbose) {
-            Memory.spawnManager.refuse.forEach(function(data) {
+            Memory.managerSpawn.refuse.forEach(function(data) {
                 console.log("(" + data.sequence + ") Refused " + data.name + " from " + data.spawn.name);
             })
         }
     },
 };
 
-module.exports = spawnManager;
+module.exports = managerSpawn;

@@ -1,5 +1,5 @@
 var roleMiner = require('role.miner');
-var spawnManager = require('spawn.manager');
+var managerSpawn = require('manager.spawn');
 
 var flagMiner = {
     manage: function(flag) {
@@ -62,7 +62,7 @@ var flagMiner = {
             //     flag.memory.index += 1;
             // }
             var spawn = Game.spawns[flag.memory.spawn_name];
-            spawnManager.addCreep(flag, 4, spawn, flag.memory.body, tname, mem);
+            managerSpawn.addCreep(flag, 4, spawn, flag.memory.body, tname, mem);
         }
         for(var i in creeps) {
             roleMiner.run(creeps[i]);

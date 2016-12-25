@@ -66,7 +66,7 @@ var roleBuilder = {
                 }
             } else {
                 var containers = creep.room.lookForAt(LOOK_STRUCTURES, fpos.x, fpos.y);
-                if(containers.length > 0 && containers[0].store[RESOURCE_ENERGY] > 500) {
+                if(containers.length > 0 && containers[0].store != undefined && containers[0].store[RESOURCE_ENERGY] > 500) {
                     if(creep.withdraw(containers[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(containers[0]);
                     }

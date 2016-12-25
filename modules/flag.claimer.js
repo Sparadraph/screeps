@@ -1,5 +1,5 @@
 var roleClaimer = require('role.claimer');
-var spawnManager = require('spawn.manager');
+var managerSpawn = require('manager.spawn');
 
 var flagClaimer = {
     manage: function(flag) {
@@ -24,7 +24,7 @@ var flagClaimer = {
             //     flag.memory.index += 1;
             // }
             var spawn = Game.spawns[flag.memory.spawn_name];
-            spawnManager.addCreep(flag, 24, spawn, flag.memory.body, tname, {});
+            managerSpawn.addCreep(flag, 24, spawn, flag.memory.body, tname, {});
         }
         for(var i in creeps) {
             roleClaimer.run(creeps[i], flag.pos);
