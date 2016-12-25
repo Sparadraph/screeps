@@ -1,6 +1,7 @@
 var roleFiller = require('role.filler');
 var tools = require('tools');
 var managerMarket = require('manager.market');
+var managerMiner = require('manager.miner');
 
 
 var managerRoom = {
@@ -97,6 +98,7 @@ var managerRoom = {
 
             if(Game.time%10 == 0) {
                 managerMarket.manage(room);
+                managerMiner.manage(room);
             }
         })
     },
