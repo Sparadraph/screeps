@@ -48,7 +48,7 @@ var roomManager = {
                 tower.repair(s);
             }
         })
-    }
+    },
 
     manageFillers: function(room) {
         if(!room.memory.max_filler) room.memory.max_filler = 2;
@@ -83,7 +83,7 @@ var roomManager = {
                 spawns[0].createCreep(room.memory.body_filler, undefined, {role: 'filler', x: room.memory.x_filler, y: room.memory.y_filler});
             }
         }
-    }
+    },
 
     manageRooms: function() {
         this.getSpawnRoomNames().forEach(function(roomName) {

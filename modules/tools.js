@@ -66,7 +66,7 @@ var tools = {
         if(flags) return flags[0];
 
         return null;
-    }
+    },
 
     clean_mem: function() {
         for(var name in Memory.creeps) {

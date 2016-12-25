@@ -17,7 +17,7 @@ var spawnManager = {
         } else {
             Memory.spawnManager.refuse.push(data);
         }
-    }
+    },
 
     produceCreep: function(verbose) {
         _.forOwn(Memory.spawnManager.accept, function(spawn) {
@@ -38,7 +38,7 @@ var spawnManager = {
                 console.log("(" + data.sequence + ") Refused " + data.name + " from " + spawn.name);
             })
         }
-    }
+    },
 };
 
 module.exports = spawnManager;
