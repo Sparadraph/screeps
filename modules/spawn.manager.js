@@ -29,7 +29,7 @@ var spawnManager = {
                 console.log("(" + data.sequence + ") Spawning " + data.name + " from " + spawn.name);
             })
             Memory.spawnManager.refuse.forEach(function(data) {
-                console.log("(" + data.sequence + ") Refused " + data.name + " from " + spawn);
+                console.log("(" + data.sequence + ") Refused " + data.name + " from " + spawn.name);
             })
         }
     }
