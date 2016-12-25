@@ -86,7 +86,7 @@ var roomManager = {
     },
 
     manageRooms: function() {
-        this.getSpawnRoomNames().forEach(function(roomName) {
+        this.getSpawnRoomNames().forEach(roomName => {
             var room = Game.rooms[roomName];
             if(this.manageTowers(room) == 0) {
                 this.manageRepairs(room);
