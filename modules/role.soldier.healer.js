@@ -10,9 +10,8 @@ var roleSoldierHealer = {
                     }
                 });
             if(closestFriend) {
-                if(creep.heal(closestFriend) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(closestFriend);
-                }
+                creep.heal(closestFriend);
+                creep.moveTo(closestFriend);
             } else {
                 tools.move(creep, fpos.x, fpos.y, fpos.roomName);
             }
