@@ -14,7 +14,7 @@ var roleFiller = {
                         return (
                             structure.structureType == STRUCTURE_EXTENSION ||
                             structure.structureType == STRUCTURE_SPAWN ||
-                            structure.structureType == STRUCTURE_TOWER
+                            (structure.structureType == STRUCTURE_TOWER && structure.energy * 1.5 < structure.energyCapacity)
                             ) && structure.energy < structure.energyCapacity;
                     }
             });

@@ -27,9 +27,11 @@ var flagSoldier = {
         if(!flag.memory.body_healer) {
             flag.memory.body_healer = [
                 MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
-                MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+                MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE, MOVE,
+                MOVE, MOVE, MOVE, MOVE, MOVE,
                 HEAL, HEAL, HEAL, HEAL, HEAL, HEAL, HEAL, HEAL, HEAL, HEAL,
-                HEAL, HEAL, HEAL, HEAL, HEAL, HEAL, HEAL, HEAL
+                HEAL, HEAL, HEAL, HEAL, HEAL, HEAL, HEAL, HEAL, HEAL, HEAL,
+                HEAL, HEAL, HEAL, HEAL, HEAL,
             ];
         }
         if(!flag.memory.body_ranger) {

@@ -34,17 +34,18 @@ var managerRoom = {
     },
 
     manageRepairs: function(room) {
-        room.find(FIND_MY_STRUCTURES, {
+        room.find(FIND_STRUCTURES, {
             filter: function(s) {
-                return  s.structureType != 'wall' && (
+                return  s.structureType != 'constructedWall' && (
                         (s.structureType == 'rampart' && s.hits < 10000) ||
                         (s.structureType != 'rampart' && s.hits < s.hitsMax)
                     );
             },
         }).forEach(function(s) {
+            /*console.log(s);*/
             var tower = s.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                 filter: function(s) {
-                    return s.structureType == 'tower';
+                    return s.structureType == 'tower' && s.energy > 0;
                 }
             })
             if(tower) {

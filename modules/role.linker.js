@@ -20,7 +20,7 @@ var roleFiller = {
                 creep.memory.target_id = storages[0].id;
             } else if(targets.length > 0 && targets[0].store == undefined) {
                 creep.memory.target_id = targets[0].id;
-            } else if (targets.length > 0 && targets[0].store[RESOURCE_ENERGY]*1.5 < targets[0].storeCapacity) {
+            } else if (targets.length > 0 && targets[0].store[RESOURCE_ENERGY]*1.1 < targets[0].storeCapacity) {
                 creep.memory.target_id = targets[0].id;
             } else if(storages.length > 0) {
                 creep.memory.target_id = storages[0].id;
