@@ -51,6 +51,7 @@ var managerMiner = {
             spawn_name: spawn.name,
             body: [CARRY, CARRY, MOVE, MOVE],
             rtype: mineral.mineralType,
+            max_creep: 1,
         }
     },
 

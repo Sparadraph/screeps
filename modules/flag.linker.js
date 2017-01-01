@@ -13,16 +13,16 @@ var flagLinker = {
             flag.memory.index = 0;
         }
         if(!flag.memory.max_creep) {
-            flag.memory.max_creep = -1;
+            flag.memory.max_creep = 1;
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn2';
+            flag.memory.spawn_name = 'Spawn10';
         }
         if(!flag.memory.body) {
             flag.memory.body = [CARRY, MOVE, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE];
         }
         if(!flag.memory.rtype) {
-            flag.memory.rtype = 'Z';
+            flag.memory.rtype = 'energy';
         }
         if(!flag.memory.max_fill) {
             flag.memory.max_fill = 1;

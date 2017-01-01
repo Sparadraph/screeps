@@ -35,7 +35,7 @@ var flagMiner = {
             flag.memory.body = [WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn3';
+            flag.memory.spawn_name = 'Spawn10';
         }
 
         var cname = 'miner_' + flag.name;
