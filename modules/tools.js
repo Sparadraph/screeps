@@ -33,7 +33,15 @@ var tools = {
 
             if(creep.memory.get_path == 1) {
                 var dest = new RoomPosition(x, y, room_name);
-                var path = creep.pos.findPathTo(dest);
+                var path = creep.pos.findPathTo(dest, {
+                    costCallback: function(rn, cm) {
+                        if(rn == 'E60N78' || rn == 'E63N79') {
+                            for(var i = 0; i < 50; i++){
+                                cm.set(i, 2, 255);
+                            }
+                        }
+                    },
+                });
                 creep.memory.path = Room.serializePath(path);
                 creep.memory.get_path = -1;
             }
@@ -49,21 +57,14 @@ var tools = {
                 return s.structureType == "storage";
             }
         })
-        if(storages) return storages[0];
-
-        var containers = room.find(FIND_MY_STRUCTURES, {
-            filters: function(s) {
-                return s.structureType == "container";
-            }
-        })
-        if(containers) return container[0];
+        if(storages.length) return storages[0];
 
         var flags = room.find(FIND_FLAGS, {
             filters: function(flag) {
-                return flag.color == 6 && flag.secondaryColor == 6;
+                return flag.color == 7 && flag.secondaryColor == 7;
             }
         })
-        if(flags) return flags[0];
+        if(flags.length) return flags[0];
 
         return null;
     },

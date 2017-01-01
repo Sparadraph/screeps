@@ -4,7 +4,7 @@ var roleFiller = {
     /** @param {Creep} creep **/
     /** @param {Pos} fpos flag.pos **/
     /** @param {Pos} fdpos flag_drop.pos **/
-    run: function(creep, fpos, fdpos, frtype) {
+    run: function(creep, fpos, fdpos, frtype, max_fill) {
         if(_.sum(creep.carry) == 0 && creep.ticksToLive > 50) {
             creep.memory.picking = true;
         }
@@ -50,8 +50,10 @@ var roleFiller = {
         } else {
             if(creep.memory.target_id) {
                 var target = Game.getObjectById(creep.memory.target_id);
-                if(creep.transfer(target, frtype) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
+                if(target.store == undefined || target.store[frtype] == undefined || target.store[frtype] < target.storeCapacity * max_fill) {
+                    if(creep.transfer(target, frtype) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target);
+                    }
                 }
             }
         }

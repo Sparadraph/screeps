@@ -13,7 +13,7 @@ var flagBuilder = {
             flag.memory.body = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn2';
+            flag.memory.spawn_name = 'Spawn3';
         }
 
         var cname = 'builder_' + flag.name;

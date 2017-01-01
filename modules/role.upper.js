@@ -1,3 +1,5 @@
+var tools = require('tools');
+
 var roleUpper = {
     /** @param {Creep} creep **/
     run: function(creep, fpos) {
@@ -6,6 +8,11 @@ var roleUpper = {
         }
         if(creep.carry[RESOURCE_ENERGY] == creep.carryCapacity) {
             creep.memory.upping = true;
+        }
+
+        if(fpos.roomName != creep.room.name) {
+            tools.move(creep, fpos.x, fpos.y, fpos.roomName);
+            return 1;
         }
 
         if(creep.memory.upping) {

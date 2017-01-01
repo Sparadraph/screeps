@@ -13,7 +13,7 @@ var flagLinker = {
             flag.memory.index = 0;
         }
         if(!flag.memory.max_creep) {
-            flag.memory.max_creep = 1;
+            flag.memory.max_creep = -1;
         }
         if(!flag.memory.spawn_name) {
             flag.memory.spawn_name = 'Spawn2';
@@ -23,6 +23,9 @@ var flagLinker = {
         }
         if(!flag.memory.rtype) {
             flag.memory.rtype = 'Z';
+        }
+        if(!flag.memory.max_fill) {
+            flag.memory.max_fill = 1;
         }
 
         var cname = 'linker_' + flag.name;
@@ -38,7 +41,7 @@ var flagLinker = {
         }
 
         for(var i in creeps) {
-            roleLinker.run(creeps[i], flag.pos, fd.pos, flag.memory.rtype);
+            roleLinker.run(creeps[i], flag.pos, fd.pos, flag.memory.rtype, flag.memory.max_fill);
         }
     }
 };

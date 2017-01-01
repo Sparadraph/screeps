@@ -8,6 +8,7 @@ var managerSpawn = {
     },
 
     addCreep: function(flag, sequence, spawn, body, name, mem) {
+        if(spawn == undefined) return -1
         var data = {flag: flag, sequence: sequence, spawn: spawn, body: body, name: name, mem: mem}
         if(!Memory.managerSpawn.accept[spawn.name]) {
             Memory.managerSpawn.accept[spawn.name] = data;

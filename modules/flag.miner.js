@@ -32,10 +32,10 @@ var flagMiner = {
         }
 
         if(!flag.memory.body) {
-            flag.memory.body = [WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE];
+            flag.memory.body = [WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn4';
+            flag.memory.spawn_name = 'Spawn3';
         }
 
         var cname = 'miner_' + flag.name;
@@ -61,7 +61,7 @@ var flagMiner = {
             managerSpawn.addCreep(flag, 4, spawn, flag.memory.body, tname, mem);
         }
         for(var i in creeps) {
-            roleMiner.run(creeps[i]);
+            roleMiner.run(creeps[i], flag);
         }
     }
 };

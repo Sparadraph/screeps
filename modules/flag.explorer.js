@@ -13,7 +13,7 @@ var flagExplorer = {
             flag.memory.body = [MOVE];
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn2';
+            flag.memory.spawn_name = 'Spawn3';
         }
         var cname = 'explorer_' + flag.name;
         var creeps = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname);

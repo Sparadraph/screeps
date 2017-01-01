@@ -59,6 +59,7 @@ var managerRoom = {
         if(!room.memory.body_filler) room.memory.body_filler = [CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
         if(!room.memory.x_filler || !room.memory.y_filler) {
             var pull_structure = tools.getPullStructure(room);
+            console.log(pull_structure);
             if(pull_structure) {
                 room.memory.x_filler = pull_structure.pos.x;
                 room.memory.y_filler = pull_structure.pos.y;
@@ -84,7 +85,11 @@ var managerRoom = {
                 }
             })
             if(spawns.length > 0) {
-                spawns[0].createCreep(room.memory.body_filler, undefined, {role: 'filler', x: room.memory.x_filler, y: room.memory.y_filler});
+                var body = room.memory.body_filler;
+                if(room.energyAvailable < 50 * body.length) {
+                    body = [CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+                }
+                spawns[0].createCreep(body, undefined, {role: 'filler', x: room.memory.x_filler, y: room.memory.y_filler});
             }
         }
     },

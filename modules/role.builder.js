@@ -20,10 +20,10 @@ var roleBuilder = {
                     if(target.hits != undefined && target.hits == target.hitsMax) {
                         creep.memory.target_id = false;
                     } else {
-                        if(target.structureType == 'constructedWall' && target.hits > 5000) {
+                        if(target.structureType == 'constructedWall' && target.hits > 5000000) {
                             creep.memory.target_id = false;
                         }
-                        if(target.structureType == 'rampart' && target.hits > 700000) {
+                        if(target.structureType == 'rampart' && target.hits > 7000000) {
                             creep.memory.target_id = false;
                         }
                     }
@@ -45,7 +45,7 @@ var roleBuilder = {
                     } else {
                         targets = creep.room.find(FIND_STRUCTURES, {
                             filter: (s) => {
-                                return s.hits < 5000 && s.hits < s.hitsMax
+                                return s.hits < 5000000 && s.hits < s.hitsMax
                             }
                         });
                         if(targets.length > 0) {

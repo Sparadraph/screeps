@@ -20,7 +20,7 @@ var roleSoldierContact = {
             } else {
                 closestHostile = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {
                     filter: (s) => {
-                        return s.structureType != 'road';
+                        return s.structureType != 'road' && s.structureType != 'controller';
                     }
                 });
                 if(closestHostile) {
