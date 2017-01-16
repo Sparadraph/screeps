@@ -67,6 +67,22 @@ module.exports.loop = function () {
     }
 
 
+    var t1 = Game.spawns['Spawn1'].room.find(FIND_MY_STRUCTURES, {
+            filter: function(s) {
+                return s.structureType == 'terminal';
+            }
+        })[0];
+    var t2 = Game.spawns['Spawn2'].room.find(FIND_MY_STRUCTURES, {
+            filter: function(s) {
+                return s.structureType == 'terminal';
+            }
+        })[0];
+    if(t1.store['energy'] > 20000) {
+        t1.send(RESOURCE_ENERGY, 10000, 'E57N76');
+    };
+    if(t2.store['energy'] > 20000) {
+        t2.send(RESOURCE_ENERGY, 10000, 'E57N76');
+    };
 
     managerSpawn.produceCreep(false);
     tools.display_cpu();

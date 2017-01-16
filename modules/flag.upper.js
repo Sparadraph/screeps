@@ -10,10 +10,13 @@ var flagUpper = {
             flag.memory.max_creep = 1;
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn5';
+            flag.memory.spawn_name = 'Spawn3';
         }
         if(!flag.memory.body) {
-            flag.memory.body = [WORK, WORK, CARRY, CARRY, MOVE, MOVE];
+            flag.memory.body = [
+                WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK,
+                WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK, WORK,
+                CARRY, CARRY, MOVE, MOVE, MOVE, MOVE, MOVE];
         }
         var cname = 'upper_' + flag.name;
         var creeps = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname);

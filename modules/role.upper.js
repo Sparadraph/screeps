@@ -19,7 +19,7 @@ var roleUpper = {
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller);
             }
-            if(creep.carry[RESOURCE_ENERGY] < 10) {
+            if(creep.carry[RESOURCE_ENERGY] < 21) {
                 var resources = creep.room.lookForAt(LOOK_RESOURCES, fpos.x, fpos.y);
                 if(resources.length > 0) {
                     creep.pickup(resources[0]);

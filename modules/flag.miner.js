@@ -21,8 +21,8 @@ var flagMiner = {
         if(!flag.memory.index) {
             flag.memory.index = 0;
         }
-        if(!flag.memory.to_replace) {
-            flag.memory.to_replace = 0;
+        if(!flag.memory.max_creep) {
+            flag.memory.max_creep = 1;
         }
         if(!flag.memory.replace_time) {
             var distx = flag.pos.x - room.controller.pos.x;
@@ -40,16 +40,15 @@ var flagMiner = {
 
         var cname = 'miner_' + flag.name;
         var creeps = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname);
-        var rcreeps = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname && creep.ticksToLive == flag.memory.replace_time)
-        if(rcreeps.length != 0) {
-            flag.memory.to_replace += rcreeps.length;
-        }
+        var rcreeps = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname && creep.ticksToLive < flag.memory.replace_time)
+
         var sources = flag.pos.lookFor(LOOK_SOURCES);
         if(sources.length == 0) {
             sources = flag.pos.lookFor(LOOK_MINERALS);
         }
 
-        if(creeps.length == 0 || flag.memory.to_replace > 0) {
+        if(creeps.length - rcreeps.length < flag.memory.max_creep) {
+        // if(creeps.length == 0 || flag.memory.to_replace > 0) {
             var mem = {
                     'x': flag.memory.pick_pos[0],
                     'y': flag.memory.pick_pos[1],

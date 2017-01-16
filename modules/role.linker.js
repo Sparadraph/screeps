@@ -5,8 +5,12 @@ var roleFiller = {
     /** @param {Pos} fpos flag.pos **/
     /** @param {Pos} fdpos flag_drop.pos **/
     run: function(creep, fpos, fdpos, frtype, max_fill) {
-        if(_.sum(creep.carry) == 0 && creep.ticksToLive > 50) {
-            creep.memory.picking = true;
+        if(_.sum(creep.carry) == 0) {
+            if(creep.ticksToLive > 20) {
+                creep.memory.picking = true;
+            } else {
+                creep.suicide()
+            }
         }
         if(_.sum(creep.carry) == creep.carryCapacity) {
             creep.memory.picking = false;
@@ -26,6 +30,26 @@ var roleFiller = {
                 creep.memory.target_id = storages[0].id;
             } else {
                 creep.memory.target_id = false;
+            }
+        }
+
+        if(!creep.memory.builder) {
+            creep.memory.builder = -1;
+            _.forEach(creep.body, function(part) {
+                if(part.type == 'work') {
+                    creep.memory.builder = 1;
+                }
+            })
+        }
+
+        if(creep.memory.builder == 1) {
+            targets = creep.pos.find(FIND_STRUCTURES, 3, {
+                filter: function(s) {
+                    return s.hits < s.hitsMax;
+                }
+            });
+            if(targets.length > 0) {
+                creep.repair(targets[0]);
             }
         }
 

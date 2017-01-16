@@ -38,6 +38,9 @@ var flagSoldier = {
         if(!flag.memory.body_ranger) {
             flag.memory.body_ranger = [MOVE, MOVE, MOVE, MOVE, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK];
         }
+        if(!flag.memory.replace_time) {
+            flag.memory.replace_time = 0
+        }
         if(!flag.memory.spawn_name) {
             flag.memory.spawn_name = 'Spawn1';
         }
@@ -46,22 +49,25 @@ var flagSoldier = {
         var cname_healer = 'soldier_healer_' + flag.name;
         var cname_ranger = 'soldier_ranger_' + flag.name;
         var contacts = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname_contact);
+        var rcontacts = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname_contact && creep.ticksToLive < flag.memory.replace_time);
         var healers = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname_healer);
+        var rhealers = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname_healer && creep.ticksToLive < flag.memory.replace_time);
         var rangers = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname_ranger);
+        var rrangers = _.filter(Game.creeps, (creep) => creep.name.substring(2) == cname_ranger && creep.ticksToLive < flag.memory.replace_time);
 
-        if(healers.length < flag.memory.max_healer) {
+        if(healers.length - rhealers.length < flag.memory.max_healer) {
             tname = flag.memory.index%10 + '_' + cname_healer;
             if(Game.spawns[flag.memory.spawn_name].createCreep(flag.memory.body_healer, tname) == tname) {
                 flag.memory.index += 1;
             }
         }
-        if(rangers.length < flag.memory.max_ranger) {
+        if(rangers.length - rrganger.length < flag.memory.max_ranger) {
             tname = flag.memory.index%10 + '_' + cname_ranger;
             if(Game.spawns[flag.memory.spawn_name].createCreep(flag.memory.body_ranger, tname) == tname) {
                 flag.memory.index += 1;
             }
         }
-        if(contacts.length < flag.memory.max_contact) {
+        if(contacts.length - rcontacts.length < flag.memory.max_contact) {
             tname = flag.memory.index%10 + '_' + cname_contact;
             if(Game.spawns[flag.memory.spawn_name].createCreep(flag.memory.body_contact, tname) == tname) {
                 flag.memory.index += 1;

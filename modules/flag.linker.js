@@ -19,7 +19,9 @@ var flagLinker = {
             flag.memory.spawn_name = 'Spawn10';
         }
         if(!flag.memory.body) {
-            flag.memory.body = [CARRY, MOVE, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE];
+            flag.memory.body = [
+                CARRY, MOVE, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE,
+                ];
         }
         if(!flag.memory.rtype) {
             flag.memory.rtype = 'energy';
