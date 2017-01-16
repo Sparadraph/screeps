@@ -27,9 +27,9 @@ var managerSpawn = {
             }
             if(data.spawn.createCreep(data.body, data.name, data.mem) == data.name) {
                 data.flag.memory.index += 1;
-                if(data.flag.memory.to_replace) {
-                    data.flag.memory.to_replace = Math.max(0, data.flag.memory.to_replace - 1);
-                }
+                // if(data.flag.memory.to_replace) {
+                //     data.flag.memory.to_replace = Math.max(0, data.flag.memory.to_replace - 1);
+                // }
                 if(verbose) {
                     console.log("(" + data.sequence + ") Spawning " + data.name + " from " + data.spawn.name);
                 }

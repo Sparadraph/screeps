@@ -17,6 +17,7 @@ var flagLink = require('flag.link');
 var tools = require('tools');
 var managerRoom = require('manager.room');
 var managerSpawn = require('manager.spawn');
+var managerMinerSK = require('manager.miner_sk');
 
 module.exports.loop = function () {
     tools.clean_mem();
@@ -33,6 +34,7 @@ module.exports.loop = function () {
     4-4 => reserver
     4-5 => claimer
     3-3 => link
+    2-2 => manager minerSK // 2-3 with name sk_<manager> for attaking keeperLair
     1-1 => soldier
     */
     for(var flag_name in Game.flags) {
@@ -63,6 +65,9 @@ module.exports.loop = function () {
         }
         if(flag.color == 3 && flag.secondaryColor == 3) {
             flagLink.manage(flag);
+        }
+        if(flag.color == 2 && flag.secondaryColor == 2) {
+            managerMinerSK.manage(flag);
         }
     }
 
