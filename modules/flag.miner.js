@@ -25,17 +25,21 @@ var flagMiner = {
             flag.memory.max_creep = 1;
         }
         if(!flag.memory.replace_time) {
-            var distx = flag.pos.x - room.controller.pos.x;
-            var disty = flag.pos.y - room.controller.pos.y;
-            var dist = Math.max(Math.abs(distx), Math.abs(disty));
-            flag.memory.replace_time = 5 * dist + 20;
+            if(room.controller) {
+                var distx = flag.pos.x - room.controller.pos.x;
+                var disty = flag.pos.y - room.controller.pos.y;
+                var dist = Math.max(Math.abs(distx), Math.abs(disty));
+                flag.memory.replace_time = 5 * dist + 20;
+            } else {
+                flag.memory.replace_time = 100;
+            }
         }
 
         if(!flag.memory.body) {
-            flag.memory.body = [WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE];
+            flag.memory.body = [WORK, WORK, WORK, WORK, WORK, MOVE, MOVE, MOVE, MOVE, MOVE/*, WORK, WORK, MOVE, MOVE*/];
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn10';
+            flag.memory.spawn_name = 'Spawn1a';
         }
 
         var cname = 'miner_' + flag.name;

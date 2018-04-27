@@ -16,11 +16,14 @@ var flagLinker = {
             flag.memory.max_creep = 1;
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn10';
+            flag.memory.spawn_name = 'Spawn4';
         }
         if(!flag.memory.body) {
             flag.memory.body = [
-                CARRY, MOVE, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE, CARRY, MOVE,
+                CARRY, MOVE, /*CARRY, MOVE, CARRY, MOVE,
+                CARRY, MOVE, CARRY, MOVE, CARRY, MOVE,
+                CARRY,CARRY, CARRY,CARRY, CARRY,CARRY,
+                CARRY, MOVE, MOVE,CARRY, CARRY, WORK*/
                 ];
         }
         if(!flag.memory.rtype) {

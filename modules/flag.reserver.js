@@ -10,10 +10,10 @@ var flagReserver = {
             flag.memory.max_creep = 1;
         }
         if(!flag.memory.body) {
-            flag.memory.body = [CLAIM, MOVE]
+            flag.memory.body = [CLAIM, MOVE, CLAIM, MOVE]
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn10';
+            flag.memory.spawn_name = 'Spawn3';
         }
 
         var cname = 'reserver_' + flag.name;

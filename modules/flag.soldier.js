@@ -18,11 +18,11 @@ var flagSoldier = {
         }
         if(!flag.memory.body_contact) {
             flag.memory.body_contact = [
+                ATTACK, MOVE,/* ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE,
                 ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE,
                 ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE,
                 ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE,
-                ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE,
-                ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE
+                ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE, ATTACK, MOVE*/
             ];
         }
         if(!flag.memory.body_healer) {
@@ -42,7 +42,7 @@ var flagSoldier = {
             flag.memory.replace_time = 0
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn1';
+            flag.memory.spawn_name = 'Spawn1a';
         }
 
         var cname_contact = 'soldier_contact_' + flag.name;
@@ -61,7 +61,7 @@ var flagSoldier = {
                 flag.memory.index += 1;
             }
         }
-        if(rangers.length - rrganger.length < flag.memory.max_ranger) {
+        if(rangers.length - rrangers.length < flag.memory.max_ranger) {
             tname = flag.memory.index%10 + '_' + cname_ranger;
             if(Game.spawns[flag.memory.spawn_name].createCreep(flag.memory.body_ranger, tname) == tname) {
                 flag.memory.index += 1;

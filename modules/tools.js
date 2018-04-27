@@ -35,11 +35,33 @@ var tools = {
                 var dest = new RoomPosition(x, y, room_name);
                 var path = creep.pos.findPathTo(dest, {
                     costCallback: function(rn, cm) {
-                        if(rn == 'E60N78' || rn == 'E63N79') {
+                        if(rn == 'W56N26') {
                             for(var i = 0; i < 50; i++){
                                 cm.set(i, 2, 255);
                             }
                         }
+                        if(rn == 'W56N18') {
+                            for(var i = 0; i < 50; i++){
+                                cm.set(i, 2, 255);
+                            }
+                        }
+
+                        flags = _.filter(Game.flags, function(flag) {
+                            return flag.color == 1 && flag.secondaryColor == 9 && flag.pos.roomName == rn;
+                        })
+
+                        for(var f in flags) {
+                            var pos = flags[f].pos;
+                            for(var i = -5; i <= 5; i++) {
+                                for(var j = -5; j <= 5; j++) {
+                                    if(0 <= pos.x+i && pos.x+i < 50 && 0 <= pos.y+j && pos.y+j < 50) {
+                                        cm.set(pos.x + i, pos.y + j, 2550);
+                                    }
+                                }
+                            }
+                        }
+
+
                     },
                 });
                 creep.memory.path = Room.serializePath(path);
@@ -49,6 +71,32 @@ var tools = {
             var path = Room.deserializePath(creep.memory.path);
             creep.moveByPath(path);
         }
+    },
+
+    getTerminal: function(room) {
+        var terminal = Game.getObjectById(room.memory.terminal_id);
+        if(terminal) return terminal;
+        terminal = room.find(FIND_MY_STRUCTURES, {
+            filter: function(s) {
+                return s.structureType == 'terminal';
+            }
+        });
+        if(terminal.length == 0) return null;
+        room.memory.terminal_id = terminal[0].id;
+        return terminal[0];
+    },
+
+    getStorage: function(room) {
+        var storage = Game.getObjectById(room.memory.storage_id);
+        if(storage) return storage;
+        storage = room.find(FIND_MY_STRUCTURES, {
+            filter: function(s) {
+                return s.structureType == 'storage';
+            }
+        });
+        if(storage.length == 0) return null;
+        room.memory.storage_id = storage[0].id;
+        return storage[0];
     },
 
     getPullStructure: function(room) {
@@ -84,7 +132,9 @@ var tools = {
         }
     },
 
-    display_cpu: function() {
+    store_cpu: function(display) {
+        display = display || false;
+
         if(!Memory.cpu_stat) {
             Memory.cpu_stat = {
                 hold: [],
@@ -103,7 +153,47 @@ var tools = {
         var total1 = _.takeRight(Memory.cpu_stat.hold, hl1).reduce(function(a, b) { return a + b; }, 0) / hl1;
         var total2 = _.takeRight(Memory.cpu_stat.hold, hl2).reduce(function(a, b) { return a + b; }, 0) / hl2;
         var total3 = _.takeRight(Memory.cpu_stat.hold, hl3).reduce(function(a, b) { return a + b; }, 0) / hl3;
-        console.log(Game.time + ' || ' + total1.toFixed(3) + ' - ' + total2.toFixed(3) + ' - ' + total3.toFixed(3) + ' [ ' + cpu_used.toFixed(3) + ' ] ' + Game.cpu.bucket.toFixed(0));
+        
+        
+        
+        if(!Memory.gcl_stat) {
+            Memory.gcl_stat = [];
+        }
+        Memory.gcl_stat.push(Game.gcl.progressTotal - Game.gcl.progress);
+        if(Memory.gcl_stat.length > 100) {
+            Memory.gcl_stat.splice(0, Memory.gcl_stat.length - 100);
+        }
+        var gcl_med = (Memory.gcl_stat[0] - Memory.gcl_stat[Memory.gcl_stat.length - 1]) / Memory.gcl_stat.length;
+        var t = (Game.gcl.progressTotal - Game.gcl.progress) / gcl_med;
+        console.log(gcl_med.toFixed(2), t.toFixed(0), (t/1200).toFixed(2), (t/28800).toFixed(3));
+        
+        
+        
+        if(display) {
+            console.log(
+                Game.time + ' || ' +
+                total1.toFixed(3) + ' - ' +
+                total2.toFixed(3) + ' - ' +
+                total3.toFixed(3) +
+                ' [ ' + cpu_used.toFixed(3) + ' ] ' +
+                Game.cpu.bucket.toFixed(0)
+            );
+
+            if(!(Game.time%5)) {
+                _.forEach(Game.rooms, function(room) {
+                    var controller = room.controller;
+                    if(controller && controller.my) {
+                        console.log(
+                            room.name + ' | ' +
+                            controller.progress + '/' +
+                            controller.progressTotal +
+                            ' [' + (controller.progress / controller.progressTotal).toFixed(4) + ']'
+                        )
+                    }
+                })
+            }
+            
+        }
     },
 
 }

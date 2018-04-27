@@ -49,7 +49,7 @@ var managerMiner = {
 
         Game.flags[name].memory = {
             spawn_name: spawn.name,
-            body: [CARRY, CARRY, MOVE, MOVE],
+            body: [CARRY, CARRY, MOVE, MOVE, CARRY, MOVE, MOVE, CARRY, MOVE, CARRY],
             rtype: mineral.mineralType,
             max_creep: 1,
         }

@@ -13,7 +13,7 @@ var flagClaimer = {
             flag.memory.body = [CLAIM, MOVE]
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn3';
+            flag.memory.spawn_name = 'Spawn1a';
         }
 
         var cname = 'claimer_' + flag.name;

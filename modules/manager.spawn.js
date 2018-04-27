@@ -5,10 +5,36 @@ var managerSpawn = {
         Memory.managerSpawn = {};
         Memory.managerSpawn.accept = {};
         Memory.managerSpawn.refuse = [];
+        if(!Memory.lockRoomNames) {
+            Memory.lockRoomNames = [];
+        }
+    },
+
+    updateLockRooms: function() {
+        var lockRoomNames = [];
+        _.forEach(Game.rooms, function(room) {
+            var keeper_lairs = room.find(FIND_HOSTILE_STRUCTURES, {
+                filter: function(str) {
+                    return str.structureType == 'keeperLair';
+                }
+            });
+            var enemys = room.find(FIND_HOSTILE_CREEPS);
+            if(enemys.length > keeper_lairs.length) {
+                lockRoomNames.push(room.name);
+            }
+        })
+
+        Memory.lockRoomNames = lockRoomNames;
     },
 
     addCreep: function(flag, sequence, spawn, body, name, mem) {
-        if(spawn == undefined) return -1
+        if(spawn == undefined) return -1;
+        // Don't spawn civilians in rooms with ennemies
+        if(flag.room != undefined && flag.color != 1 && Memory.lockRoomNames.indexOf(flag.room.name) >= 0) {
+            console.log('REFUSING ' + flag.name);
+            return -1;
+        }
+
         var data = {flag: flag, sequence: sequence, spawn: spawn, body: body, name: name, mem: mem}
         if(!Memory.managerSpawn.accept[spawn.name]) {
             Memory.managerSpawn.accept[spawn.name] = data;

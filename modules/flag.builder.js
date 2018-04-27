@@ -7,13 +7,13 @@ var flagBuilder = {
             flag.memory.index = 0;
         }
         if(!flag.memory.max_creep) {
-            flag.memory.max_creep = 2;
+            flag.memory.max_creep = 3;
         }
         if(!flag.memory.body) {
-            flag.memory.body = [WORK, WORK, WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
+            flag.memory.body = [WORK,WORK,WORK, CARRY, CARRY, CARRY, MOVE, MOVE, MOVE];
         }
         if(!flag.memory.spawn_name) {
-            flag.memory.spawn_name = 'Spawn3';
+            flag.memory.spawn_name = 'Spawn1a';
         }
 
         var cname = 'builder_' + flag.name;
@@ -21,7 +21,7 @@ var flagBuilder = {
         if(creeps.length < flag.memory.max_creep) {
             var tname = flag.memory.index%10 + '_' + cname;
             var spawn = Game.spawns[flag.memory.spawn_name];
-            managerSpawn.addCreep(flag, 16, spawn, flag.memory.body, tname, {});
+            managerSpawn.addCreep(flag, 16, spawn, flag.memory.body, tname, flag.memory.build_room ? {build_room: flag.memory.build_room} : {});
 
         }
         for(var i in creeps) {

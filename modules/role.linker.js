@@ -12,7 +12,7 @@ var roleFiller = {
                 creep.suicide()
             }
         }
-        if(_.sum(creep.carry) == creep.carryCapacity) {
+        if(_.sum(creep.carry) >= creep.carryCapacity - 5) {
             creep.memory.picking = false;
             var storages = creep.room.find(FIND_STRUCTURES, {
                 filter: (s) => {
@@ -20,11 +20,11 @@ var roleFiller = {
                 }
             });
             var targets = Game.rooms[fdpos.roomName].lookForAt(LOOK_STRUCTURES, fdpos.x, fdpos.y);
-            if(storages.length > 0 && storages[0].store[RESOURCE_ENERGY] < 10000) {
+            if(storages.length > 0 && storages[0].store[RESOURCE_ENERGY] < -10000) {
                 creep.memory.target_id = storages[0].id;
             } else if(targets.length > 0 && targets[0].store == undefined) {
                 creep.memory.target_id = targets[0].id;
-            } else if (targets.length > 0 && targets[0].store[RESOURCE_ENERGY]*1.1 < targets[0].storeCapacity) {
+            } else if (targets.length > 0) {/* && targets[0].store[RESOURCE_ENERGY]*1.1 < targets[0].storeCapacity) {*/
                 creep.memory.target_id = targets[0].id;
             } else if(storages.length > 0) {
                 creep.memory.target_id = storages[0].id;
@@ -43,13 +43,16 @@ var roleFiller = {
         }
 
         if(creep.memory.builder == 1) {
-            targets = creep.pos.find(FIND_STRUCTURES, 3, {
-                filter: function(s) {
-                    return s.hits < s.hitsMax;
+            var target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+            if(creep.build(target) != 0) {
+                target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: function(s) {
+                        return s.hits < s.hitsMax;
+                    }
+                });
+                if(target) {
+                    creep.repair(target);
                 }
-            });
-            if(targets.length > 0) {
-                creep.repair(targets[0]);
             }
         }
 

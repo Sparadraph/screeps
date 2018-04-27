@@ -11,6 +11,11 @@ var roleBuilder = {
         }
 
         if(creep.memory.building) {
+            if(creep.memory.build_room && creep.memory.build_room != creep.room.name) {
+                creep.moveTo(new RoomPosition(21,7,creep.memory.build_room));
+                return;
+            }
+            
             if(creep.memory.target_id) {
                 var target = Game.getObjectById(creep.memory.target_id);
                 if(target) {
@@ -45,7 +50,7 @@ var roleBuilder = {
                     } else {
                         targets = creep.room.find(FIND_STRUCTURES, {
                             filter: (s) => {
-                                return s.hits < 500 && s.hits < s.hitsMax
+                                return s.hits < 200000 && s.hits < s.hitsMax
                             }
                         });
                         if(targets.length > 0) {
